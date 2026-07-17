@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "@fontsource/figtree/400.css";
+@import "@fontsource/figtree/500.css";
+@import "@fontsource/figtree/600.css";
+@import "@fontsource/figtree/700.css";
+@import "@fontsource/lora/400.css";
+@import "@fontsource/lora/400-italic.css";
+@import "@fontsource/lora/500-italic.css";
+@import "@fontsource/lora/600.css";
+
+/* Tailwind v4 gates `hover:`/`group-hover:` behind @media (hover: hover) by
+   default to avoid sticky-hover on touch. That media feature reports false in
+   some preview/embedded rendering contexts even on real desktop mice, which
+   was silently killing every hover interaction on the site. Force plain
+   `&:hover` so hover effects always fire for an actual pointer hovering. */
+@custom-variant hover (&:hover);
+
+@theme {
+  /* ---- Palette: soft sky-white base, layered navy/steel blues, a vivid orange pop ---- */
+  --color-cream: #F1F4F8;
+  --color-cream-dim: #E6ECF3;
+  --color-paper: #FFFFFF;
+  --color-ink: #121A2E;
+  --color-ink-soft: #1A2540;
+  --color-olive: #3E76B0;
+  --color-olive-deep: #1F4A80;
+  --color-olive-dust: #93ACCE;
+  --color-stone: #5B6270;
+  --color-spark: #F0752F;
+  --color-spark-deep: #A8481A;
+  --color-white: #FFFFFF;
+
+  --font-display: "Lora", "Lora Fallback", Georgia, "Times New Roman", serif;
+  --font-sans: "Figtree", "Figtree Fallback", Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Infinite logo marquee: track holds two copies of the list; translating by
+   -50% of the track's own width loops seamlessly regardless of viewport size. */
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 26s linear infinite;
+}
+
+.marquee-group:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+::selection {
+  background: var(--color-spark);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.italic-accent {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Recurring signature mark: a four-point spark, echoing "clarity found within complexity" */
+.spark-mark {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  position: relative;
+  flex-shrink: 0;
+}
+.spark-mark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 6.5 12 12 12 12C12 12 6.5 12 0 12C6.5 12 12 12 12 12C12 12 12 17.5 12 24C12 17.5 12 12 12 12C12 12 17.5 12 24 12C17.5 12 12 12 12 12C12 12 12 6.5 12 0Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C12 6.5 12 12 12 12C12 12 6.5 12 0 12C6.5 12 12 12 12 12C12 12 12 17.5 12 24C12 17.5 12 12 12 12C12 12 17.5 12 24 12C17.5 12 12 12 12 12C12 12 12 6.5 12 0Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.container-edit {
+  width: 100%;
+  max-width: 84rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-edit {
+    padding-inline: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-edit {
+    padding-inline: 4rem;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
