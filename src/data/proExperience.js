@@ -1,5 +1,18 @@
 export const proExperience = [
   {
+    id: "maybank-cfs",
+    categories: ["strategy", "finance", "analytics"],
+    role: "Community Financial Services Intern",
+    org: "Maybank",
+    location: "Jakarta, Indonesia",
+    timeframe: "July 2026 – Present",
+    summary:
+      "Conduct competitive intelligence and market research to identify growth opportunities for Maybank's Community Financial Services division. Analyze financial reports and industry trends to develop strategic recommendations, and support the development of B2B payroll solutions and strategic client presentations for prospective multinational corporations.",
+    focus: ["Competitive intelligence", "Financial report analysis", "Growth strategy", "Client pitch support"],
+    logo: "/images/logos/maybank.png",
+    linkedCaseStudy: null,
+  },
+  {
     id: "tutor",
     categories: [],
     role: "Mathematics & Economics Tutor",

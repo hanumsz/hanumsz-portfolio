@@ -2,6 +2,7 @@ import { useState } from "react";
 import Reveal from "./Reveal";
 
 const LOGOS = [
+  { src: "/images/logos/maybank.png", alt: "Maybank", href: "https://www.maybank.com" },
   { src: "/images/logos/uoft.png", alt: "University of Toronto", href: "https://www.utoronto.ca" },
   { src: "/images/logos/rotman-commerce.png", alt: "Rotman Commerce", href: "https://rotmancommerce.utoronto.ca/" },
   {
