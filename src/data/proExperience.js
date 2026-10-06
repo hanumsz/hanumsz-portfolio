@@ -1,5 +1,18 @@
 export const proExperience = [
   {
+    id: "ta-calculus-linear-algebra",
+    categories: [],
+    role: "Teaching Assistant — Calculus & Linear Algebra for Commerce",
+    org: "University of Toronto",
+    location: "Toronto, ON",
+    timeframe: "August 2026 – Present",
+    summary:
+      "Teach and support 50+ undergraduate commerce students in a university-level course covering applied calculus, linear algebra, and quantitative methods for business and finance. Explain complex mathematical concepts in clear and accessible terms while guiding students through quantitative problem-solving. Facilitate classes and assessments, grade midterm and final examinations, and collaborate with course instructors to support student learning and effective course delivery.",
+    focus: ["University-level teaching", "Quantitative communication", "Applied mathematics", "Assessment & grading"],
+    logo: "/images/logos/uoft.png",
+    linkedCaseStudy: null,
+  },
+  {
     id: "maybank-cfs",
     categories: ["strategy", "finance", "analytics"],
     role: "Community Financial Services Intern",
@@ -10,7 +23,7 @@ export const proExperience = [
       "Conduct competitive intelligence and market research to identify growth opportunities for Maybank's Community Financial Services division. Analyze financial reports and industry trends to develop strategic recommendations, and support the development of B2B payroll solutions and strategic client presentations for prospective multinational corporations.",
     focus: ["Competitive intelligence", "Financial report analysis", "Growth strategy", "Client pitch support"],
     logo: "/images/logos/maybank.png",
-    linkedCaseStudy: null,
+    linkedCaseStudies: ["maybank-churn-survival-analysis", "maybank-bali-marathon-sentiment-analysis"],
   },
   {
     id: "tutor",

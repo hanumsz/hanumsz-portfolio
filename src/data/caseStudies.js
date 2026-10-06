@@ -350,6 +350,112 @@ export const caseStudies = [
     ],
     downloads: [],
   },
+  {
+    slug: "maybank-churn-survival-analysis",
+    categories: ["analytics", "finance"],
+    tag: "Analytics · Finance",
+    title: "Survival Analysis for Banking Customer Churn",
+    hook: "Long-tenure customers are usually assumed to be the 'safe' ones. A Kaplan-Meier and Cox proportional hazards model on 10,000 banking customers found the opposite.",
+    org: "Maybank — Community Financial Services",
+    role: "Community Financial Services Intern",
+    timeframe: "2026",
+    heroImage: "proj-churn-survival",
+    quickStats: [
+      { value: "0.72", label: "Cox model concordance index" },
+      { value: "52%", label: "Lower hazard for active members" },
+    ],
+    overview:
+      "As part of my internship, I ran a self-directed survival analysis project applying the CRISP-DM framework end to end, from business understanding through deployment recommendations, on a public banking customer churn dataset (10,000 customers, sourced via Kaggle). Rather than treating churn as a single yes/no classification, I modeled it as a time-to-event problem — how long a customer stays before churning, and what changes their risk along the way — using Python (pandas, lifelines, matplotlib).",
+    challenge:
+      "The standard retention assumption is that new customers are the highest-risk group and that risk falls off once someone is past an initial onboarding period. I wanted to test that assumption directly: does churn risk actually decline with tenure, and which customer characteristics genuinely move the needle versus which ones just correlate?",
+    role_detail:
+      "I owned the analysis independently — framing the business questions, preparing the data, building both models, and translating the statistical output into retention recommendations.",
+    research:
+      "I validated data quality (a 20.4% churn rate — a moderate but not extreme class imbalance), removed non-predictive identifier fields, and one-hot encoded categorical variables before fitting a Kaplan-Meier estimator for the overall survival curve and a Cox Proportional Hazards model across nine covariates.",
+    process: [
+      {
+        title: "Kaplan-Meier estimation",
+        body: "Fit the overall survival curve across all customers, then computed the instantaneous hazard rate at each tenure point (events at t divided by customers still at risk) to check whether the curve's steepening was a real risk increase or just a shrinking risk-set artifact.",
+      },
+      {
+        title: "Cox Proportional Hazards modeling",
+        body: "Modeled churn risk against nine covariates simultaneously, then tested the proportional hazards assumption on each one rather than assuming it held.",
+      },
+      {
+        title: "Conditional survival probability",
+        body: "Calculated year-over-year conditional survival — the probability a customer who has already stayed to year N stays one more year — to directly answer whether 'loyal' customers are actually lower-risk.",
+      },
+      {
+        title: "Business translation",
+        body: "Converted the statistical findings into a deployment recommendation: which retention levers are both strong predictors and genuinely actionable.",
+      },
+    ],
+    deliverables: [
+      "Kaplan-Meier survival curve and hazard rate diagnostics",
+      "Cox Proportional Hazards model with assumption testing",
+      "Conditional (year-over-year) survival probability analysis",
+      "CRISP-DM report with retention recommendations",
+    ],
+    impact:
+      "The hazard rate climbed consistently with tenure rather than falling — from 0.0095 at year 0 to 0.206 at year 10 — meaning long-tenured customers were not automatically 'safer,' overturning the standard onboarding-risk assumption. The Cox model reached a concordance index of 0.72 (a good ranking score for this kind of business application) and found that account activity (IsActiveMember) was the strongest protective factor, cutting hazard by 52%, while financial profile variables (balance, credit score, salary) barely moved the needle compared to demographic and engagement factors. The recommendation: shift retention spend from a front-loaded onboarding push to a sustained, activity-triggered program across the full customer lifecycle.",
+    reflection:
+      "The Kaplan-Meier curve alone made the steep drop near year 10 look like the highest-risk period — until I checked the at-risk set size and realized it had shrunk from 2,499 to 490 customers there, which inflates noise. Separating the true hazard-rate trend from that sample-size artifact was the difference between a correct and a misleading recommendation.",
+    gallery: [],
+    downloads: [{ label: "Full CRISP-DM report", note: "Confidential internship project — available to discuss on request" }],
+  },
+  {
+    slug: "maybank-bali-marathon-sentiment-analysis",
+    categories: ["marketing", "analytics"],
+    tag: "Marketing · Analytics",
+    title: "Sentiment & Aspect Analysis of the Maybank Bali Marathon",
+    hook: "Six years of public opinion on the Maybank Bali Marathon, collected through web scraping and scored aspect by aspect — including catching the model's own misclassification along the way.",
+    org: "Maybank — Community Financial Services",
+    role: "Community Financial Services Intern",
+    timeframe: "2026",
+    heroImage: "proj-marathon-sentiment",
+    quickStats: [
+      { value: "60%", label: "Of sentences scored positive" },
+      { value: "6", label: "Race years analyzed (2012–2025)" },
+    ],
+    overview:
+      "I built an aspect-based sentiment analysis of public opinion on the Maybank Bali Marathon, covering six race years (2012, 2017, 2019, 2022, 2023, 2025). Since no internal survey data existed for most of those years, I collected the opinion data myself through web scraping in Python — using requests and BeautifulSoup to pull blog race-reviews and news coverage, and testing the YouTube Data API v3 for video comments as a secondary source.",
+    challenge:
+      "Maybank wanted a read on how race organization has actually been received over time, and which recurring complaints (if any) represent structural issues worth prioritizing before the next race — without a formal post-event survey program in place to answer that directly.",
+    role_detail:
+      "I ran the project independently end to end: sourcing and scraping the data, building the aspect-tagging and sentiment pipeline, and stress-testing my own findings before writing the recommendations.",
+    research:
+      "I scraped seven source documents across the six race years, tagged each sentence against six organizer-relevant aspects (via explicit keyword matching, so every tag is traceable back to the words that triggered it), and scored sentiment using VADER — a lexicon-based method chosen specifically because it needs no training data and keeps every score auditable back to the words that produced it.",
+    process: [
+      {
+        title: "Web scraping & source evaluation",
+        body: "Scraped blog reviews and news articles with requests + BeautifulSoup; also trialed the YouTube Data API v3 for comments, but dropped it as a primary source after only 12.5% of sampled comments turned out to be substantively relevant.",
+      },
+      {
+        title: "Cleaning & aspect tagging",
+        body: "Cleaned scraped text (stripping nav/footer noise picked up from one news source), segmented it into sentences, and tagged each sentence against one or more of six organization-relevant aspects.",
+      },
+      {
+        title: "VADER sentiment scoring",
+        body: "Scored each sentence on VADER's compound scale and classified it positive, negative, or neutral against the standard ±0.05 threshold.",
+      },
+      {
+        title: "Sensitivity analysis",
+        body: "Stress-tested the findings three ways: varying the classification threshold across a 20x range, a leave-one-year-out test to check no single year was driving the conclusions, and comparing strict vs. loose keyword lists for aspect tagging.",
+      },
+    ],
+    deliverables: [
+      "Web-scraped, aspect-tagged sentiment dataset across 6 race years",
+      "Sensitivity analysis (threshold, leave-one-out, keyword-list robustness)",
+      "Manual misclassification audit and correction",
+      "CRISP-DM report with 2026 race-organization recommendations",
+    ],
+    impact:
+      "Overall sentiment was consistently positive (60% of tagged sentences) with no long-term downward trend across 2012–2025. Race-pack collection and shuttle-bus logistics stood out as the one true recurring issue — surfacing as a complaint in three separate years (2012, 2017, 2019) in different forms, which is exactly the pattern that indicates a structural process gap rather than a one-off incident. A manual spot-check also caught the model itself misclassifying a mixed-opinion sentence ('very well organized... incredibly difficult') as negative — correcting it changed 2025 from an apparent outlier back in line with the overall trend, which became a methodological note in the report about lexicon-based sentiment's limits on mixed-opinion text.",
+    reflection:
+      "The sensitivity analysis was the most valuable part of the project, not the headline sentiment number. Testing the keyword list alone (strict vs. loose) swung the number of tagged sentences by up to 150% — a reminder that 'the data shows X' is only as trustworthy as the subjective choices behind how that data was built.",
+    gallery: [],
+    downloads: [{ label: "Full CRISP-DM report", note: "Confidential internship project — available to discuss on request" }],
+  },
 ];
 
 export const getCaseStudy = (slug) => caseStudies.find((c) => c.slug === slug);
